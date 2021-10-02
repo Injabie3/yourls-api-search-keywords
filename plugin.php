@@ -1,18 +1,19 @@
 <?php
     
     /*
-     Plugin Name: Lookup keywords by long URL substring
-     Plugin URI: https://github.com/bryzgaloff/yourls-api-lookup-keywords-by-url-substr
+     Plugin Name: Search for keywords
+     Plugin URI: https://github.com/Injabie3/yourls-api-search-keywords 
+     Forked from: https://github.com/bryzgaloff/yourls-api-lookup-keywords-by-url-substr
      Forked from: https://github.com/timcrockford/yourls-api-edit-url
-     Description: Define a custom API action 'lookup-url-substr'
+     Description: Define a custom API action 'search_keywords'
      Version: 0.0.1
-     Author: Anton Bryzgalov
-     Author URI: https://github.com/bryzgaloff
+     Author: Injabie3
+     Author URI: https://github.com/Injabie3
      */
     
-    yourls_add_filter( 'api_action_lookup-url-substr', 'api_lookup_url_substr' );
+    yourls_add_filter( 'api_action_search_keywords', 'api_action_search_keywords' );
     
-    function api_lookup_url_substr() {
+    function api_action_search_keywords() {
         if ( ! isset( $_REQUEST['substr'] ) ) {
             return array(
                 'statusCode' => 400,
@@ -28,7 +29,7 @@
         global $ydb;
         $table = YOURLS_DB_TABLE_URL;
         $keywords = $ydb->fetchCol(
-            "SELECT `keyword` FROM `$table` WHERE `url` LIKE :pattern",
+            "SELECT `keyword` FROM `$table` WHERE `keyword` LIKE :pattern",
             array('pattern' => '%' . $sanitized_val . '%'),
         );
 
