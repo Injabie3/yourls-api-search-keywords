@@ -14,17 +14,17 @@
     yourls_add_filter( 'api_action_search_keywords', 'api_action_search_keywords' );
     
     function api_action_search_keywords() {
-        if ( ! isset( $_REQUEST['substr'] ) ) {
+        if ( ! isset( $_REQUEST['keyword'] ) ) {
             return array(
                 'statusCode' => 400,
                 'status'     => 'fail',
-                'simple'     => "Need a 'substr' parameter",
-                'message'    => "error: missing param 'substr'",
+                'simple'     => "Need a 'keyword' parameter",
+                'message'    => "error: missing param 'keyword'",
             );
         }
 
-        $url_substr = $_REQUEST['substr'];
-        $sanitized_val = yourls_sanitize_url( $url_substr );
+        $search_kw = $_REQUEST['keyword'];
+        $sanitized_val = yourls_sanitize_url( $search_kw );
 
         global $ydb;
         $table = YOURLS_DB_TABLE_URL;
