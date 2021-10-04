@@ -3,8 +3,8 @@
 This YOURLS plugin adds a new command to the YOURLS API: `action=search_keywords`
 
 For a given keyword, it searches all keywords in the database and returns keywords
-that are similar to the given string. The API call requires a `kw` parameter,
-and uses the `LIKE %kw%` SQL expression to filter entries.
+that are similar to the given string. The API call requires a `search_term` parameter,
+and uses the `LIKE %search_term%` SQL expression to filter entries.
 
 ## Example
 Assume your database contains the following keywords (the URL is irrelevant):
@@ -17,12 +17,12 @@ Assume your database contains the following keywords (the URL is irrelevant):
 | jlptwordlist |
 
 The following API calls will respond with the corresponding `keywords` field values:
-* `action=keyword_search&substr=anime` =>
+* `action=keyword_search&search_term=anime` =>
   `["myanimelist", "myfavouriteanime", "seasonalanime"]`
-* `action=keyword_search&substr=my` =>
+* `action=keyword_search&search_term=my` =>
   `["myanimelist", "myfavouriteanime", "myfigurecollection"]`
-* `action=keyword_search&substr=list` => `["myanimelist", "jlptwordlist"]`
-* `action=keyword_search&substr=manga` => `[]`
+* `action=keyword_search&search_term=list` => `["myanimelist", "jlptwordlist"]`
+* `action=keyword_search&search_term=manga` => `[]`
 
 ## How to install this plugin
 1. Create a new directory under the "user/plugins" directory
